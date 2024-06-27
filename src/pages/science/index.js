@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 import image from "../../../public/image.jpeg";
 import Image from "next/image";
 
-export default function Home({ scienceNews }) {
+export default function SciencePage({ scienceNews }) {
   const [cart, setCart] = useState([]);
   const addToCart = (item) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -147,7 +147,7 @@ export async function getStaticProps() {
     console.error("Error fetching science news:", error);
     return {
       props: {
-        scienceNews,
+        scienceNews: [],
       },
     };
   }

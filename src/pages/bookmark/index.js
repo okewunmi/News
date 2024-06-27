@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { TbArrowForwardUp } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
+
 const index = () => {
   const [cart, setCart] = useState([]);
 
