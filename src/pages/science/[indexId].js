@@ -224,9 +224,9 @@
 
 import React, { useState, useEffect } from "react";
 import Menu from "@/components/MenuBar";
-import { Content, Details, Wrapper, Other } from "@/styles/styles";
+import { Details, Wrapper, Other } from "@/styles/styles"; // Assuming Content was not used
 import { FaBookmark } from "react-icons/fa";
-import { TbArrowForwardUp } from "react-icons/tb";
+import { MdArrowForward } from "react-icons/md";
 import Link from "next/link";
 
 function NewsDetail({ news, relatedArticles }) {
@@ -245,7 +245,8 @@ function NewsDetail({ news, relatedArticles }) {
 
   const currentDate = new Date(pubDate);
   const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
+  const month = currentDate.getMonth(); // Adjusted to zero-based index for month
+  const year = currentDate.getFullYear();
   const monthNames = [
     "January",
     "February",
@@ -260,16 +261,15 @@ function NewsDetail({ news, relatedArticles }) {
     "November",
     "December",
   ];
+  const monthString = monthNames[month];
 
-  const monthString = monthNames[month - 1];
-  const year = currentDate.getFullYear();
   const dateFormat = `${day} ${monthString}, ${year}`;
 
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(savedCart);
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
   }, []);
 
   const addToCart = (item) => {
@@ -290,8 +290,10 @@ function NewsDetail({ news, relatedArticles }) {
               <button onClick={() => addToCart(news)}>
                 <FaBookmark className="btn" />
               </button>
-              <Link href={link} target="_blank" className="redirectLink">
-                <TbArrowForwardUp className="btn redirect" />
+              <Link href={link} passHref>
+                <a target="_blank" className="redirectLink">
+                  <MdArrowForward className="btn redirect" />
+                </a>
               </Link>
             </div>
             <div className="bottom__num">
@@ -302,11 +304,11 @@ function NewsDetail({ news, relatedArticles }) {
           <div className="txt">
             <div className="time">
               <p className="time__time">
-                <span>Source: </span> {source_id}
+                <span>Source: </span> {source_id || "Unknown"}
               </p>
-              <p className="time__date">{dateFormat || "3 March 2023"}</p>
+              <p className="time__date">{dateFormat}</p>
               <p className="time__time">
-                <span> By :</span> {creator || "unknown"}
+                <span>By: </span> {creator || "Unknown"}
               </p>
             </div>
             <h1 className="head">{title}</h1>
@@ -332,12 +334,12 @@ function NewsDetail({ news, relatedArticles }) {
                 category,
               } = article;
 
-              const relatedDate = new Date(pubDate);
-              const relatedDay = relatedDate.getDate();
-              const relatedMonth = relatedDate.getMonth() + 1;
-              const relatedMonthString = monthNames[relatedMonth - 1];
-              const relatedYear = relatedDate.getFullYear();
-              const relatedDateFormat = `${relatedDay} ${relatedMonthString}, ${relatedYear}`;
+              const articleDate = new Date(pubDate);
+              const articleDay = articleDate.getDate();
+              const articleMonth = articleDate.getMonth(); // Adjusted to zero-based index for month
+              const articleYear = articleDate.getFullYear();
+              const articleMonthString = monthNames[articleMonth];
+              const articleDateFormat = `${articleDay} ${articleMonthString}, ${articleYear}`;
 
               return (
                 <div key={index} className="box">
@@ -348,15 +350,11 @@ function NewsDetail({ news, relatedArticles }) {
                       className="image"
                     />
                   </div>
-                  <p className="box__date">
-                    {relatedDateFormat || "3 March 2023"}
-                  </p>
-                  <Link href={`/science/${index}`} key={index}>
-                    <p className="box__title">{title}</p>
+                  <p className="box__date">{articleDateFormat}</p>
+                  <Link href={`/science/${index}`} passHref>
+                    <a className="box__title">{title}</a>
                   </Link>
-                  <p className="box__txt">
-                    {description.slice(0, 120).concat(" ...")}
-                  </p>
+                  <p className="box__txt">{description.slice(0, 120)}...</p>
                   <div className="box__bottom">
                     <div className="num">
                       <p className="number">{source_priority || 218020}</p>
@@ -366,8 +364,10 @@ function NewsDetail({ news, relatedArticles }) {
                       <button onClick={() => addToCart(article)}>
                         <FaBookmark className="btn" />
                       </button>
-                      <Link href={link}>
-                        <TbArrowForwardUp className="btn redirect" />
+                      <Link href={link} passHref>
+                        <a>
+                          <MdArrowForward className="btn redirect" />
+                        </a>
                       </Link>
                     </div>
                   </div>
@@ -388,9 +388,8 @@ export default NewsDetail;
 export async function getStaticPaths() {
   try {
     const response = await fetch(
-      `https://newsdata.io/api/1/latest?apikey=pub_190253e826e13c8df31ac656b1975f4e9e42a&country=ng&category=science`
+      `https://newsdata.io/api/1/latest?apikey=pub_190253e826e13c8df31ac656b1975f4e9e42a&country=ng&category=politics`
     );
-
     const data = await response.json();
 
     if (!Array.isArray(data.results)) {

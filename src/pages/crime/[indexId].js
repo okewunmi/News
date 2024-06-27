@@ -355,7 +355,7 @@ function NewsDetail({ news, relatedArticles }) {
                   <p className="box__date">
                     {articleDateFormat || "3 March 2023"}
                   </p>
-                  <Link href={`/business/${index}`} key={index}>
+                  <Link href={`/crime/${index}`} key={index}>
                     <p className="box__title">{title}</p>
                   </Link>
                   <p className="box__txt">

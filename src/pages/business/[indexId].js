@@ -424,6 +424,7 @@ export async function getStaticProps({ params }) {
     );
     const data = await response.json();
 
+    // Check if data.results is an array
     if (!Array.isArray(data.results)) {
       throw new Error("Invalid API response structure");
     }
