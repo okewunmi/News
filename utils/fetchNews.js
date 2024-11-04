@@ -35,7 +35,6 @@ export async function fetchNewsData(category) {
       `https://newsdata.io/api/1/latest?apikey=pub_190253e826e13c8df31ac656b1975f4e9e42a&country=ng&category=${category}`
     );
     const data = await response.json();
-    console.log(data);
 
     // Ensure no undefined values are present in the fetched data
     const sanitizedResults = data.results.map((item) => ({

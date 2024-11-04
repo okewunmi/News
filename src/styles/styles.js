@@ -13,6 +13,7 @@ export const Content = styled.div`
   color: #fff;
   width: 100%;
   max-height: 100%;
+  padding: 0 1.5rem 0 0;
 
   .card {
     height: 80vh;
@@ -63,6 +64,17 @@ export const Content = styled.div`
 
   .card::-webkit-scrollbar-button {
     width: 5px;
+  }
+  .head__box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn_next {
+      color: #000;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
   }
 
   .heading {
