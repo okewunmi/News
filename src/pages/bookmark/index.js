@@ -21,7 +21,6 @@ const index = () => {
   };
   return (
     <Wrapper>
-      <Menu />
       <Content>
         <h1 className="heading">Bookmarked Articles</h1>
 

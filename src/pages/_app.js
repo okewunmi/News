@@ -1,10 +1,12 @@
 import "@/styles/globals.css";
+import Menu from "@/components/MenuBar/index";
 import {
   Abril_Fatface,
   EB_Garamond,
   Nunito_Sans,
   Roboto_Flex,
 } from "next/font/google";
+import { Wrapper } from "@/styles/styles";
 
 // const inter = Inter({
 //   subsets: ["latin"],
@@ -44,10 +46,11 @@ const nunito_Sans = Nunito_Sans({
 
 export default function App({ Component, pageProps }) {
   return (
-    <main
+    <Wrapper
       className={` ${abril_Fatface.variable} ${nunito_Sans.variable} ${roboto_Flex.variable}`}
     >
+      <Menu />
       <Component {...pageProps} />
-    </main>
+    </Wrapper>
   );
 }

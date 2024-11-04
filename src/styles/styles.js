@@ -14,8 +14,6 @@ export const Content = styled.div`
   width: 100%;
   max-height: 100%;
 
-  /* background: yellow; */
-  /* margin: 0.6rem; */
   .card {
     height: 80vh;
     padding: 0.5rem 2rem;
@@ -90,6 +88,8 @@ export const Content = styled.div`
 
     .time {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 2rem;
       font-size: 0.8rem;
       font-family: var(--font-roboto), sans-serif;
@@ -187,6 +187,8 @@ export const Details = styled.div`
     border-radius: 1.2rem;
     width: 100%;
     height: 90%;
+    object-fit: cover;
+    border: 1px solid #ccce;
   }
   .txt__box {
     padding: 2.2rem;
@@ -271,16 +273,16 @@ export const Details = styled.div`
 `;
 
 export const Other = styled.div`
-  width: 30%;
+  width: 35%;
   max-height: 100%;
-  padding: 1.2rem 0.5rem 1rem 3rem;
+  padding: 1.2rem 0rem 1rem 3rem;
   display: flex;
   flex-direction: column;
   position: relative;
 
   .list {
     height: 75vh;
-    width: 95%;
+    width: 90%;
     overflow-x: auto;
     scroll-behavior: smooth;
     overscroll-behavior-inline: contain;
