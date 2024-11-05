@@ -12,7 +12,7 @@ export default function BusinessPage({ sportNews }) {
   return (
     <Wrapper>
       <Content>
-        <h1 className="heading">Sport News</h1>
+        <h1 className="heading">Sports News</h1>
         <section className="card">
           {sportNews &&
             sportNews.length > 0 &&
@@ -27,7 +27,7 @@ export default function BusinessPage({ sportNews }) {
 
 // Reuse `fetchNewsData` with the category argument
 export async function getStaticProps() {
-  const sportNews = await fetchNewsData("sport");
+  const sportNews = await fetchNewsData("sports");
 
   return {
     props: {
