@@ -85,7 +85,7 @@ export async function getStaticProps({ params }) {
     console.error("Error fetching news:", error);
     return {
       props: {
-        news: null,
+        news,
         relatedArticles: [],
       },
     };
