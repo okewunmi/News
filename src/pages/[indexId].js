@@ -2,6 +2,8 @@ import React from "react";
 import { Wrapper, Other } from "@/styles/styles";
 import { CardDetail } from "../components/card/index";
 import { Card2 } from "../components/card/index";
+import "dotenv/config";
+const API = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 function NewsDetail({ news, relatedArticles }) {
   return (
     <Wrapper>
@@ -27,7 +29,7 @@ export default NewsDetail;
 export async function getStaticPaths() {
   try {
     const response = await fetch(
-      `https://newsdata.io/api/1/latest?apikey=pub_190253e826e13c8df31ac656b1975f4e9e42a&country=ng`
+      `https://newsdata.io/api/1/latest?apikey=${API}&country=ng`
     );
     const data = await response.json();
 
@@ -55,7 +57,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   try {
     const response = await fetch(
-      `https://newsdata.io/api/1/latest?apikey=pub_190253e826e13c8df31ac656b1975f4e9e42a&country=ng`
+      `https://newsdata.io/api/1/latest?apikey=${API}&country=ng`
     );
     const data = await response.json();
 
